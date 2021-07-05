@@ -121,6 +121,12 @@
 
 			echo json_encode($response);
 		}
+
+		public function selectPelanggan()
+		{
+			$get = $this->PelangganModel->selectPelanggan();
+			echo json_encode($get);
+		}
 	}
 	
 	/* End of file Pelanggan.php */

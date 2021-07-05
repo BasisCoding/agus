@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="<?= site_url('assets/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') ?>">
   <link rel="stylesheet" href="<?= site_url('assets/assets/vendor/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') ?>">
   <link rel="stylesheet" href="<?= site_url('assets/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css') ?>">
+  <link rel="stylesheet" href="<?= site_url('assets/assets/vendor/select2/dist/css/select2.min.css')?>">
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="<?= site_url('assets/assets/css/argon.css?v=1.1.0') ?>" type="text/css">

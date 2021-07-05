@@ -12,7 +12,7 @@
                 <div class="col-6">
                   <h3 class="mb-0">Daftar Pelanggan</h3>
                   <p class="text-sm mb-0">
-                    Tabel ini berisi informasi data pelanggan yang ada pada instansi kami.
+                    Tabel ini berisi informasi data pelanggan.
                   </p>
                 </div>
 

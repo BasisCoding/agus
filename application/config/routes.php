@@ -57,3 +57,4 @@ $route['logout'] = 'Auth/logout';
 
 $route['admin'] = 'admin/Dashboard';
 $route['pelanggan'] = 'admin/Pelanggan';
+$route['penjualan'] = 'admin/Penjualan';

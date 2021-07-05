@@ -1,17 +1,18 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	
-	class PelangganModel extends CI_Model {
+	class PenjualanModel extends CI_Model {
 		
-		var $column_order = array(null, 'a.id', 'a.nama_lengkap', 'hp', 'a.alamat', 'a.created_at'); 
-	    var $column_search = array('a.nama_lengkap', 'a.hp', 'a.alamat'); //field yang diizin untuk pencarian 
-	    var $order = array('a.nama_lengkap' => 'asc'); // default order 
-	    var $table = 'pelanggan';
+		var $column_order = array(null, 'b.nama_lengkap', 'a.jumlah', 'a.created_at'); 
+	    var $column_search = array('b.nama_lengkap', 'a.jumlah'); //field yang diizin untuk pencarian 
+	    var $order = array('a.created_at' => 'asc'); // default order 
+	    var $table = 'penjualan';
 
 	// Datatable
 		private function _get_datatables_query()
 		{
-			$this->db->select('a.*');
+			$this->db->select('a.*, b.nama_lengkap');
+			$this->db->join('pelanggan as b', 'b.id = a.id_pelanggan', 'left');
 			$this->db->from($this->table.' as a');
 	        $i = 0;
 	     	
@@ -44,9 +45,9 @@
 	        }
 		}
 
-	// Datatable pelanggan
+	// Datatable Penjualan
 
-		function get_pelanggan()
+		function get_penjualan()
 		{
 			$this->_get_datatables_query();
 	        if($_POST['length'] != -1)
@@ -57,38 +58,33 @@
 	        return $query->result();
 		}
 
-		function count_filtered_pelanggan()
+		function count_filtered_penjualan()
 	    {
 	        $this->_get_datatables_query();
 	        $query = $this->db->get();
 	        return $query->num_rows();
 	    }
 	 
-	    function count_all_pelanggan()
+	    function count_all_penjualan()
 	    {
 	        $this->db->from($this->table);
 	        return $this->db->count_all_results();
 	    }
-	// Datatable pelanggan
+	// Datatable Penjualan
 
-	    function addPelanggan($data)
+	    function addPenjualan($data)
 	    {
 			return $this->db->insert($this->table, $data);
 	    }
 
-	    function updatePelanggan($id, $data)
+	    function updatePenjualan($id, $data)
 	    {
 	    	return $this->db->update($this->table, $data, array('id' => $id));
 	    }
 
-	    function deletePelanggan($id)
+	    function deletePenjualan($id)
 	    {
-	    	return $this->db->delete('pelanggan', array('id' => $id));
-	    }
-
-	    function selectPelanggan()
-	    {
-	    	return $this->db->get($this->table)->result();
+	    	return $this->db->delete($this->table, array('id' => $id));
 	    }
 	}
 	
