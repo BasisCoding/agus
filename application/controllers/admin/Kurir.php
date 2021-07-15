@@ -1,30 +1,30 @@
 <?php 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	
-	class Pelanggan extends CI_Controller {
+	class Kurir extends CI_Controller {
 
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->model('PelangganModel');
+			$this->load->model('KurirModel');
 		}
 	
 		public function index()
 		{
-			$def['title'] = SHORT_SITE_URL.' | Pelanggan';
-			$def['breadcrumb'] = 'Pelanggan';
+			$def['title'] = SHORT_SITE_URL.' | Kurir';
+			$def['breadcrumb'] = 'Kurir';
 
 			$this->load->view('partials/head', $def);
 			$this->load->view('partials/navbar');
 			$this->load->view('partials/breadcrumb', $def);
-			$this->load->view('admin/pelanggan');
+			$this->load->view('admin/kurir');
 			$this->load->view('partials/footer');
-			$this->load->view('admin/plugins/pelanggan');
+			$this->load->view('admin/plugins/kurir');
 		}
 
-		public function get_pelanggan()
+		public function get_kurir()
 		{
-			$list = $this->PelangganModel->get_pelanggan();
+			$list = $this->KurirModel->get_kurir();
 
 			$data = array();
 			$no = $_POST['start'];
@@ -51,22 +51,22 @@
 
 			$output = array(
 				"draw" => $_POST['draw'],
-	            "recordsTotal" => $this->PelangganModel->count_all_pelanggan(),
-	            "recordsFiltered" => $this->PelangganModel->count_filtered_pelanggan(),
+	            "recordsTotal" => $this->KurirModel->count_all_kurir(),
+	            "recordsFiltered" => $this->KurirModel->count_filtered_kurir(),
 	            "data" => $data
 			);
 
 			echo json_encode($output);
 		}
 		
-		public function addPelanggan()
+		public function addKurir()
 		{
 			$data['nama_lengkap'] = $this->input->post('nama_lengkap');
 			$data['hp'] = $this->input->post('hp');
 			$data['alamat'] = $this->input->post('alamat');
 			$data['username'] = $this->input->post('username');
 			$data['password'] =hash('sha512', $this->input->post('password').config_item('encryption_key'));
-			$data['level'] = 4;
+			$data['level'] = 2;
 			$data['status'] = 1;
 
 			$validasi = $this->db->get_where('users', array('username' => $data['username']));
@@ -89,16 +89,17 @@
 					$data['foto'] = NULL;
 				}
 
-				$act = $this->PelangganModel->addPelanggan($data);
+				$act = $this->KurirModel->addKurir($data);
+				
 				if ($act) {
 					$response = array(
 						'type' => 'success',
-						'message' => 'Data Pelanggan berhasil dikirim'
+						'message' => 'Data Kurir berhasil dikirim'
 					);
 				}else{
 					$response = array(
 						'type' => 'danger',
-						'message' => 'Data Pelanggan gagal dikirim'
+						'message' => 'Data Kurir gagal dikirim'
 					);
 				}
 			}
@@ -106,7 +107,7 @@
 			echo json_encode($response);
 		}
 
-		public function updatePelanggan()
+		public function updateKurir()
 		{
 			$id = $this->input->post('id');
 			$data['nama_lengkap'] = $this->input->post('nama_lengkap');
@@ -130,50 +131,45 @@
 				$data['foto'] = $this->input->post('foto_lama');
 			}
 
-			$act = $this->PelangganModel->updatePelanggan($id, $data);
+			$act = $this->KurirModel->updateKurir($id, $data);
 			if ($act) {
 				$response = array(
 					'type' => 'success',
-					'message' => 'Data Pelanggan berhasil diubah'
+					'message' => 'Data Kurir berhasil diubah'
 				);
 			}else{
 				$response = array(
 					'type' => 'danger',
-					'message' => 'Data Pelanggan gagal diubah'
+					'message' => 'Data Kurir gagal diubah'
 				);
 			}
 
 			echo json_encode($response);
 		}
 
-		public function deletePelanggan()
+		public function deleteKurir()
 		{
 			$id = $this->input->post('id');
 			$foto = $this->input->post('foto');
-			$act = $this->PelangganModel->deletePelanggan($id);
+			$act = $this->KurirModel->deleteKurir($id);
 			if ($act) {
 				@unlink("./assets/assets/img/users/".$this->input->post('foto'));
 				$response = array(
 					'type' => 'success',
-					'message' => 'Data Pelanggan berhasil dihapus'
+					'message' => 'Data Kurir berhasil dihapus'
 				);
 			}else{
 				$response = array(
 					'type' => 'danger',
-					'message' => 'Data Pelanggan gagal dihapus'
+					'message' => 'Data Kurir gagal dihapus'
 				);
 			}
 
 			echo json_encode($response);
 		}
 
-		public function selectPelanggan()
-		{
-			$get = $this->PelangganModel->selectPelanggan();
-			echo json_encode($get);
-		}
 	}
 	
-	/* End of file Pelanggan.php */
-	/* Location: ./application/controllers/admin/Pelanggan.php */
+	/* End of file Kurir.php */
+	/* Location: ./application/controllers/admin/Kurir.php */
 ?>

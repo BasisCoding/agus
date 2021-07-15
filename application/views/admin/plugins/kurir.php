@@ -4,9 +4,9 @@
 	var table;
 	$(document).ready(function() {
 		
-		 // $('#table-pelanggan').scrollbar();
+		 // $('#table-Kurir').scrollbar();
 
-		table = $('#table-pelanggan').DataTable({
+		table = $('#table-kurir').DataTable({
 			"processing": true, 
             "serverSide": true,
             // "scrollX": true,
@@ -20,7 +20,7 @@
             "autoWidth" : true,
              
             "ajax": {
-                "url": "<?= base_url('admin/Pelanggan/get_pelanggan')?>",
+                "url": "<?= base_url('admin/Kurir/get_kurir')?>",
                 "type": "POST"
             },
 
@@ -44,7 +44,7 @@
 
 		function actionData(formData, action) {
 			$.ajax({
-				url: '<?= base_url("admin/Pelanggan/") ?>'+action+'',
+				url: '<?= base_url("admin/Kurir/") ?>'+action+'',
 				type: 'POST',
 				dataType: 'JSON',
 				data: formData,
@@ -76,7 +76,7 @@
 			});
 		}
 
-		$('#form-addPelanggan').submit(function() {
+		$('#form-addKurir').submit(function() {
 			
 			var formData = new FormData();
 	            formData.append('nama_lengkap', $('[name="nama_lengkap"]').val()); 
@@ -86,11 +86,11 @@
 	            formData.append('password', $('[name="password"]').val());
 	            formData.append('foto', $('[name="foto"]')[0].files[0]);
 
-        	actionData(formData, 'addPelanggan');
+        	actionData(formData, 'addKurir');
         	return false;
 		});
 
-		$('#form-updatePelanggan').submit(function() {
+		$('#form-updateKurir').submit(function() {
 			
 			var formData = new FormData();
 	            formData.append('id', $('[name="id_update"]').val()); 
@@ -101,19 +101,19 @@
 	            formData.append('foto_lama', $('[name="foto_lama"]').val());
 	            formData.append('foto', $('[name="foto_update"]')[0].files[0]);
 
-            actionData(formData, 'updatePelanggan');
+            actionData(formData, 'updateKurir');
             return false;
 		});
 
-		$('#form-deletePelanggan').submit(function() {
+		$('#form-deleteKurir').submit(function() {
 			var formData = new FormData();
-	            formData.append('id', $('[name="id_pelanggan_delete"]').val());
+	            formData.append('id', $('[name="id_kurir_delete"]').val());
 	            formData.append('foto', $('[name="foto_delete"]').val());
-			actionData(formData, 'deletePelanggan');
+			actionData(formData, 'deleteKurir');
         	return false;
 		});
 
-		$('#table-data-pelanggan').on('click', '.update-data', function() {
+		$('#table-data-kurir').on('click', '.update-data', function() {
 			var id = $(this).attr('data-id');
 			var nama = $(this).attr('data-nama');
 			var hp = $(this).attr('data-hp');
@@ -128,19 +128,19 @@
 			$('[name="username_update"]').val(username);
 			$('[name="foto_lama"]').val(foto);
 
-			$('#modal-updatePelanggan').modal('show');
+			$('#modal-updateKurir').modal('show');
 		});
 
-		$('#table-data-pelanggan').on('click', '.delete-data', function() {
+		$('#table-data-kurir').on('click', '.delete-data', function() {
 			var id = $(this).attr('data-id');
 			var foto = $(this).attr('data-foto');
 			var nama = $(this).attr('data-nama');
 
-			$('#pelanggan-delete').html(nama);
-			$('[name="id_pelanggan_delete"]').val(id);
+			$('#Kurir-delete').html(nama);
+			$('[name="id_kurir_delete"]').val(id);
 			$('[name="foto_delete"]').val(foto);
 
-			$('#modal-deletePelanggan').modal('show');
+			$('#modal-deleteKurir').modal('show');
 		});
 
 	});

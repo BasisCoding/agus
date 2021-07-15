@@ -18,37 +18,6 @@
               </div>
             </div>
             <div class="py-4">
-              <div class="block p-3">
-                <form class="form" id="form-addPenjualan">
-                  <div class="row">
-
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>Nama Pelanggan</label>
-                        <select class="form-control" name="id_pelanggan" data-toggle="select">
-                          <option value="">Bukan Pelanggan</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>Jumlah</label>
-                        <input type="number" name="jumlah" class="form-control" name="jumlah" required="">
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>Total Bayar</label>
-                        <input type="number" id="harga" class="form-control" disabled="">
-                      </div>
-                    </div>
-
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </div>
               <table class="table table-flush" id="table-penjualan">
                 <thead class="thead-light">
                   <tr>
