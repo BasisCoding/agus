@@ -86,3 +86,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 define('SITE_URL', 'Sistem Penjualan Galon Air');
 define('SHORT_SITE_URL', 'Penjualan Galon');
+define('HARGA_SATUAN', 8000);

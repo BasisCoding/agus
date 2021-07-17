@@ -11,8 +11,10 @@
 	// Datatable
 		private function _get_datatables_query()
 		{
-			$this->db->select('a.*, b.nama_lengkap');
-			$this->db->join('pelanggan as b', 'b.id = a.id_pelanggan', 'left');
+			$this->db->select('a.*, b.nama_lengkap as nama_pelanggan, c.nama_lengkap as nama_kurir');
+			$this->db->join('users as b', 'b.id = a.id_pelanggan', 'left');
+			$this->db->join('users as c', 'c.id = a.id_kurir', 'left');
+
 			$this->db->from($this->table.' as a');
 	        $i = 0;
 	     	

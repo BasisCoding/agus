@@ -25,27 +25,26 @@
 		public function get_Penjualan()
 		{
 			$list = $this->PenjualanModel->get_penjualan();
-
+			// echo $this->db->last_query($list);
 			$data = array();
 			$no = $_POST['start'];
 
 			foreach ($list as $ls) {
-				if ($ls->id_pelanggan != NULL) {
-					$pelanggan = $ls->nama_lengkap;
-				}else{
-					$pelanggan = '<span class="text-danger">Bukan Pelanggan</span>';
-				}
+
 				$no++;
 				$row = array();
 				$row[] = $no;
-				$row[] = $pelanggan;
+				$row[] = $ls->nama_pelanggan;
+				$row[] = $ls->nama_kurir;
 				$row[] = $ls->jumlah;
-				$row[] = number_format($ls->jumlah*5000);
-				$row[] = $ls->created_at;
+				$row[] = number_format($ls->jumlah*HARGA_SATUAN);
+				$row[] = $ls->tanggal_dibuat;
+				$row[] = $ls->tanggal_dikirim;
+				$row[] = $ls->tanggal_diterima;
 
 				$row[] = '
 					<div class="btn-group">
-						<button data-id="'.$ls->id.'" data-nama="'.$ls->nama_lengkap.'" class="btn btn-danger delete-data btn-sm"><span class="fas fa-times"></span></button>
+						<button data-id="'.$ls->id.'" data-nama="'.$ls->nama_pelanggan.'" class="btn btn-danger delete-data btn-sm"><span class="fas fa-times"></span></button>
 					</div>';
 
 				$data[] = $row;

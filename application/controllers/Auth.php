@@ -62,7 +62,6 @@
 			$data_session = array(
 				'id'			=> $row->id,
 				'username'		=> $row->username,
-				'email'			=> $row->email,
 				'nama_lengkap'	=> $row->nama_lengkap,
 				'level'			=> $row->level,
 				'foto'			=> $row->foto,
