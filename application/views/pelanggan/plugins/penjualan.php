@@ -18,7 +18,7 @@
             "autoWidth" : true,
              
             "ajax": {
-                "url": "<?= base_url('kurir/Penjualan/get_penjualan')?>",
+                "url": "<?= base_url('pelanggan/Penjualan/get_penjualan')?>",
                 "type": "POST"
             },
 
@@ -42,7 +42,7 @@
 
 		function actionData(formData, action) {
 			$.ajax({
-				url: '<?= base_url("kurir/Penjualan/") ?>'+action+'',
+				url: '<?= base_url("pelanggan/Penjualan/") ?>'+action+'',
 				type: 'POST',
 				dataType: 'JSON',
 				data: formData,
@@ -71,24 +71,22 @@
 			});
 		}
 
-		$('#form-kirimBarang').submit(function() {
+		$('#form-konfirmasi').submit(function() {
 			var formData = new FormData();
 	            formData.append('id', $('[name="id_penjualan"]').val());
 
-			actionData(formData, 'kirimBarang');
-			$('#modal-kirimBarang').modal('hide');
+			actionData(formData, 'konfirmasi');
+			$('#modal-konfirmasi').modal('hide');
 
         	return false;
 		});
 
-		$('#table-data-penjualan').on('click', '.btn-kirim', function() {
+		$('#table-data-penjualan').on('click', '.btn-konfirmasi', function() {
 			var id = $(this).attr('data-id');
-			var nama = $(this).attr('data-nama');
 
-			$('#nama-pelanggan').html(nama);
 			$('[name="id_penjualan"]').val(id);
 
-			$('#modal-kirimBarang').modal('show');
+			$('#modal-konfirmasi').modal('show');
 		});
 
 	});

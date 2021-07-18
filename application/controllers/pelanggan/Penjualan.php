@@ -17,32 +17,33 @@
 			$this->load->view('partials/head', $def);
 			$this->load->view('partials/navbar');
 			$this->load->view('partials/breadcrumb', $def);
-			$this->load->view('kurir/penjualan');
+			$this->load->view('pelanggan/penjualan');
 			$this->load->view('partials/footer');
-			$this->load->view('kurir/plugins/penjualan');
+			$this->load->view('pelanggan/plugins/penjualan');
 		}
 
 		public function get_Penjualan()
 		{
-			$list = $this->PenjualanModel->getPenjualanKurir();
+			$list = $this->PenjualanModel->getPenjualanPelanggan();
 			$data = array();
 			$no = $_POST['start'];
 			$button = '';
 			foreach ($list as $ls) {
 				if ($ls->tanggal_dikirim == null) {
-					$button .= '<button data-id="'.$ls->id.'" data-nama="'.$ls->nama_pelanggan.'" class="btn btn-success btn-kirim btn-sm"><span class="ni ni-delivery-fast"></span> Kirim
-							</button>';
+					$button .= '<span class="btn btn-primary btn-sm"><span class="ni ni-delivery-fast"></span> Sedang Dikirim</span>';
 				}
 				if ($ls->tanggal_dikirim != null && $ls->tanggal_diterima == null) {
-					$button .= '<span class="btn btn-primary btn-sm"><span class="ni ni-delivery-fast"></span> Tunggu Konfirmasi</span>';
+					$button .= '<button data-id="'.$ls->id.'" data-nama="'.$ls->nama_pelanggan.'" class="btn btn-success btn-konfirmasi btn-sm"><span class="ni ni-delivery-fast"></span> Konfirmasi
+							</button>';
 				}
 				if ($ls->tanggal_diterima != null) {
 					$button .= '<span class="btn btn-warning btn-sm"><span class="ni ni-delivery-fast"></span> Selesai</span>';
 				}
+
 				$no++;
 				$row = array();
 				$row[] = $no;
-				$row[] = $ls->nama_pelanggan;
+				$row[] = $ls->nama_kurir;
 				$row[] = $ls->jumlah;
 				$row[] = number_format($ls->jumlah*HARGA_SATUAN);
 				$row[] = $ls->tanggal_dibuat;
@@ -56,31 +57,31 @@
 
 			$output = array(
 				"draw" => $_POST['draw'],
-	            "recordsTotal" => $this->PenjualanModel->count_all_penjualankurir(),
-	            "recordsFiltered" => $this->PenjualanModel->count_filtered_penjualankurir(),
+	            "recordsTotal" => $this->PenjualanModel->count_all_penjualanPelanggan(),
+	            "recordsFiltered" => $this->PenjualanModel->count_filtered_penjualanPelanggan(),
 	            "data" => $data
 			);
 
 			echo json_encode($output);
 		}
 
-		public function kirimBarang()
+		public function konfirmasi()
 		{
 			$id = $this->input->post('id');
 			
-			$data['id_kurir'] = $this->session->userdata('id');
-			$data['tanggal_dikirim'] = date('Y-m-d H:i:s');
+			// $data['id_kurir'] = $this->session->userdata('id');
+			$data['tanggal_diterima'] = date('Y-m-d H:i:s');
 
 			$act = $this->PenjualanModel->updatePenjualan($id, $data);
 			if ($act) {
 				$response = array(
 					'type' => 'success',
-					'message' => 'Data Penjualan berhasil dikirim'
+					'message' => 'Data Penjualan Selesai'
 				);
 			}else{
 				$response = array(
 					'type' => 'danger',
-					'message' => 'Data Penjualan gagal dikirim'
+					'message' => 'Data Penjualan Gagal Dikonfirmasi'
 				);
 			}
 

@@ -24,8 +24,7 @@
 
 		public function get_Penjualan()
 		{
-			$list = $this->PenjualanModel->get_penjualan();
-			// echo $this->db->last_query($list);
+			$list = $this->PenjualanModel->getPenjualan();
 			$data = array();
 			$no = $_POST['start'];
 

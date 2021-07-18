@@ -49,29 +49,100 @@
 
 	// Datatable Penjualan
 
-		function get_penjualan()
-		{
-			$this->_get_datatables_query();
-	        if($_POST['length'] != -1)
-	        $this->db->limit($_POST['length'], $_POST['start']);
+		// Admin
+			function getPenjualan()
+			{
+				$this->_get_datatables_query();
+		        if($_POST['length'] != -1)
+		        $this->db->limit($_POST['length'], $_POST['start']);
 
+		        $query = $this->db->get();
+		        return $query->result();
+			}
 
-	        $query = $this->db->get();
-	        return $query->result();
-		}
+			function count_filtered_penjualan()
+		    {
+		        $this->_get_datatables_query();
+		        $query = $this->db->get();
+		        return $query->num_rows();
+		    }
+		 
+		    function count_all_penjualan()
+		    {
+		        $this->db->from($this->table);
+		        return $this->db->count_all_results();
+		    }
+		// Admin
 
-		function count_filtered_penjualan()
-	    {
-	        $this->_get_datatables_query();
-	        $query = $this->db->get();
-	        return $query->num_rows();
-	    }
-	 
-	    function count_all_penjualan()
-	    {
-	        $this->db->from($this->table);
-	        return $this->db->count_all_results();
-	    }
+		// Kurir
+
+		    function getPenjualanKurir()
+		    {
+		    	$this->_get_datatables_query();
+		        if($_POST['length'] != -1)
+		        $this->db->limit($_POST['length'], $_POST['start']);
+
+		    	$this->db->where('id_kurir', $this->session->userdata('id'));
+		    	$this->db->or_where('id_kurir', NULL);
+
+		        $query = $this->db->get();
+		        return $query->result();
+		    }
+
+		    function count_filtered_penjualankurir()
+		    {
+		        $this->_get_datatables_query();
+		        $this->db->where('id_kurir', $this->session->userdata('id'));
+		    	$this->db->or_where('id_kurir', NULL);
+
+		        $query = $this->db->get();
+		        return $query->num_rows();
+		    }
+		 
+		    function count_all_penjualankurir()
+		    {
+		        $this->db->from($this->table);
+		        $this->db->where('id_kurir', $this->session->userdata('id'));
+		    	$this->db->or_where('id_kurir', NULL);
+
+		        return $this->db->count_all_results();
+		    }
+
+		// Kurir
+
+		// Pelanggan
+
+		    function getPenjualanPelanggan()
+		    {
+		    	$this->_get_datatables_query();
+		        if($_POST['length'] != -1)
+		        $this->db->limit($_POST['length'], $_POST['start']);
+
+		    	$this->db->where('id_pelanggan', $this->session->userdata('id'));
+
+		        $query = $this->db->get();
+		        return $query->result();
+		    }
+
+		    function count_filtered_penjualanPelanggan()
+		    {
+		        $this->_get_datatables_query();
+		        $this->db->where('id_pelanggan', $this->session->userdata('id'));
+
+		        $query = $this->db->get();
+		        return $query->num_rows();
+		    }
+		 
+		    function count_all_penjualanPelanggan()
+		    {
+		        $this->db->from($this->table);
+		        $this->db->where('id_pelanggan', $this->session->userdata('id'));
+		    	
+		        return $this->db->count_all_results();
+		    }
+		    
+		// Pelanggan
+
 	// Datatable Penjualan
 
 	    function addPenjualan($data)
