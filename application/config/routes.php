@@ -56,5 +56,11 @@ $route['translate_uri_dashes'] = FALSE;
 $route['logout'] = 'Auth/logout';
 
 $route['admin'] = 'admin/Dashboard';
-$route['pelanggan'] = 'admin/Pelanggan';
-$route['penjualan'] = 'admin/Penjualan';
+$route['admin/listPelanggan'] = 'admin/Pelanggan';
+$route['admin/listPenjualan'] = 'admin/Penjualan';
+
+$route['kurir'] = 'kurir/Dashboard';
+$route['kurir/profilKurir'] = 'kurir/Profile';
+$route['kurir/listPenjualanKurir'] = 'kurir/Penjualan';
+
+$route['pelanggan'] = 'pelanggan/Dashboard';

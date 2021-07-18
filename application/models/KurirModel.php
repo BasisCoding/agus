@@ -73,6 +73,10 @@
 	        return $this->db->count_all_results();
 	    }
 	// Datatable Kurir
+	    function getProfile($id)
+	    {
+	    	return $this->db->get_where('users',array('id' => $id))->row();
+	    }
 
 	    function addKurir($data)
 	    {
