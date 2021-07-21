@@ -18,7 +18,7 @@
             "autoWidth" : true,
              
             "ajax": {
-                "url": "<?= base_url('pelanggan/Penjualan/get_penjualan')?>",
+                "url": "<?= base_url('pelanggan/Pemesanan/get_penjualan')?>",
                 "type": "POST"
             },
 
@@ -42,7 +42,7 @@
 
 		function actionData(formData, action) {
 			$.ajax({
-				url: '<?= base_url("pelanggan/Penjualan/") ?>'+action+'',
+				url: '<?= base_url("pelanggan/Pemesanan/") ?>'+action+'',
 				type: 'POST',
 				dataType: 'JSON',
 				data: formData,
@@ -87,6 +87,23 @@
 			$('[name="id_penjualan"]').val(id);
 
 			$('#modal-konfirmasi').modal('show');
+		});
+
+		$('[name="jumlah"]').on('keyup', function(event) {
+			event.preventDefault();
+			var harga = <?= HARGA_SATUAN ?>;
+			$('[name="harga"]').val($(this).val() * harga);
+		});
+
+		$('#form-addPemesanan').submit(function() {
+			var formData = new FormData();
+	            formData.append('jumlah', $('[name="jumlah"]').val());
+	            formData.append('harga', $('[name="harga"]').val());
+
+			actionData(formData, 'addPemesanan');
+			$('#modal-addPemesanan').modal('hide');
+
+        	return false;
 		});
 
 	});

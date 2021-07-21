@@ -15,6 +15,13 @@
                     Tabel ini berisi informasi data penjualan.
                   </p>
                 </div>
+
+                <div class="col-6 text-right">
+                  <button class="btn btn-sm btn-neutral btn-round btn-icon" data-toggle="modal" data-target="#modal-addPemesanan">
+                    <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+                    <span class="btn-inner--text">Tambah</span>
+                  </button>
+                </div>
               </div>
             </div>
             <div class="py-4 table-responsive">
@@ -37,6 +44,41 @@
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <div class="modal fade" id="modal-addPemesanan" tabindex="-1" role="dialog" aria-labelledby="modal-addPemesanan" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-top modal-sm" role="document">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modal-title-default">Tambah Pesanan</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                  <form class="form" id="form-addPemesanan" method="POST">
+
+                    <div class="form-group">
+                      <label class="h5">QTY</label>
+                      <input type="number" name="jumlah" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="h5">Harga</label>
+                      <input type="text" name="harga" class="form-control" required readonly="">
+                    </div>
+                    
+                  </form> 
+                </div>
+
+                <div class="modal-footer mt-0">
+                  <button type="submit" form="form-addPemesanan" class="btn btn-primary align-right">Save</button>
+                </div>
+                
+            </div>
         </div>
       </div>
 

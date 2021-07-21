@@ -29,16 +29,17 @@
 			$no = $_POST['start'];
 			$button = '';
 			foreach ($list as $ls) {
-				if ($ls->tanggal_dikirim == null) {
-					$button .= '<button data-id="'.$ls->id.'" data-nama="'.$ls->nama_pelanggan.'" class="btn btn-success btn-kirim btn-sm"><span class="ni ni-delivery-fast"></span> Kirim
+				if ($ls->tanggal_dibuat != null) {
+					$button = '<button data-id="'.$ls->id.'" data-nama="'.$ls->nama_pelanggan.'" class="btn btn-success btn-kirim btn-sm"><span class="ni ni-delivery-fast"></span> Kirim
 							</button>';
+					if ($ls->tanggal_dikirim != null) {
+						$button = '<span class="btn btn-primary btn-sm"><span class="ni ni-delivery-fast"></span> Tunggu Konfirmasi</span>';
+						if ($ls->tanggal_diterima != null) {
+							$button = '<span class="btn btn-warning btn-sm"><span class="ni ni-delivery-fast"></span> Selesai</span>';
+						}
+					}
 				}
-				if ($ls->tanggal_dikirim != null && $ls->tanggal_diterima == null) {
-					$button .= '<span class="btn btn-primary btn-sm"><span class="ni ni-delivery-fast"></span> Tunggu Konfirmasi</span>';
-				}
-				if ($ls->tanggal_diterima != null) {
-					$button .= '<span class="btn btn-warning btn-sm"><span class="ni ni-delivery-fast"></span> Selesai</span>';
-				}
+				
 				$no++;
 				$row = array();
 				$row[] = $no;

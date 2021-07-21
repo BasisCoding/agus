@@ -1,7 +1,7 @@
 <?php 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	
-	class Penjualan extends CI_Controller {
+	class Pemesanan extends CI_Controller {
 
 		public function __construct()
 		{
@@ -11,8 +11,8 @@
 	
 		public function index()
 		{
-			$def['title'] = SHORT_SITE_URL.' | Penjualan';
-			$def['breadcrumb'] = 'Penjualan';
+			$def['title'] = SHORT_SITE_URL.' | Pemesanan';
+			$def['breadcrumb'] = 'Pemesanan';
 
 			$this->load->view('partials/head', $def);
 			$this->load->view('partials/navbar');
@@ -29,16 +29,18 @@
 			$no = $_POST['start'];
 			$button = '';
 			foreach ($list as $ls) {
-				if ($ls->tanggal_dikirim == null) {
-					$button .= '<span class="btn btn-primary btn-sm"><span class="ni ni-delivery-fast"></span> Sedang Dikirim</span>';
-				}
-				if ($ls->tanggal_dikirim != null && $ls->tanggal_diterima == null) {
-					$button .= '<button data-id="'.$ls->id.'" data-nama="'.$ls->nama_pelanggan.'" class="btn btn-success btn-konfirmasi btn-sm"><span class="ni ni-delivery-fast"></span> Konfirmasi
+				if ($ls->tanggal_dibuat != null) {
+					$button = '<span class="btn btn-primary btn-sm"><span class="ni ni-delivery-fast"></span> Tunggu Pengiriman</span>';
+					if ($ls->tanggal_dikirim != null) {
+					$button = '<button data-id="'.$ls->id.'" data-nama="'.$ls->nama_pelanggan.'" class="btn btn-success btn-konfirmasi btn-sm"><span class="ni ni-delivery-fast"></span> Konfirmasi
 							</button>';
+						if ($ls->tanggal_diterima != null) {
+						$button = '<span class="btn btn-warning btn-sm"><span class="ni ni-delivery-fast"></span> Selesai</span>';
+						}
+					}
+					
 				}
-				if ($ls->tanggal_diterima != null) {
-					$button .= '<span class="btn btn-warning btn-sm"><span class="ni ni-delivery-fast"></span> Selesai</span>';
-				}
+				
 
 				$no++;
 				$row = array();
@@ -82,6 +84,29 @@
 				$response = array(
 					'type' => 'danger',
 					'message' => 'Data Penjualan Gagal Dikonfirmasi'
+				);
+			}
+
+			echo json_encode($response);
+		}
+
+		public function addPemesanan()
+		{
+			$data['id_pelanggan'] = $this->session->userdata('id');
+			$data['jumlah'] = $this->input->post('jumlah');
+			$data['harga'] = $this->input->post('harga');
+			$data['tanggal_dibuat'] = date('Y-m-d H:i:s');
+
+			$act = $this->PenjualanModel->addPenjualan($data);
+			if ($act) {
+				$response = array(
+					'type' => 'success',
+					'message' => 'Pemesanan Selesai, Silahkan tunggu konfirmasi pengiriman'
+				);
+			}else{
+				$response = array(
+					'type' => 'danger',
+					'message' => 'Pemesanan Gagal, Silahkan Cobalagi'
 				);
 			}
 
