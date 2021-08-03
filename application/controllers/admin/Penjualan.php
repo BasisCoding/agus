@@ -41,11 +41,6 @@
 				$row[] = $ls->tanggal_dikirim;
 				$row[] = $ls->tanggal_diterima;
 
-				$row[] = '
-					<div class="btn-group">
-						<button data-id="'.$ls->id.'" data-nama="'.$ls->nama_pelanggan.'" class="btn btn-danger delete-data btn-sm"><span class="fas fa-times"></span></button>
-					</div>';
-
 				$data[] = $row;
 			}
 

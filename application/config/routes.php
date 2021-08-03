@@ -66,3 +66,5 @@ $route['kurir/listPenjualanKurir'] = 'kurir/Penjualan';
 $route['pelanggan'] = 'pelanggan/Dashboard';
 $route['pelanggan/profilPelanggan'] = 'pelanggan/Profile';
 $route['pelanggan/listPemesanan'] = 'pelanggan/Pemesanan';
+
+$route['(:any)/laporan'] = 'Laporan';

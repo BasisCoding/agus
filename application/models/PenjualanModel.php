@@ -15,6 +15,12 @@
 			$this->db->join('users as b', 'b.id = a.id_pelanggan', 'left');
 			$this->db->join('users as c', 'c.id = a.id_kurir', 'left');
 
+			if($this->input->post('jenis'))
+	        {
+	            $this->db->where('DATE(a.'.$this->input->post('jenis').') >=', $this->input->post('startDate'));
+	            $this->db->where('DATE(a.'.$this->input->post('jenis').') <=', $this->input->post('endDate'));
+	        }
+
 			$this->db->from($this->table.' as a');
 	        $i = 0;
 	     	
@@ -142,6 +148,33 @@
 		    }
 		    
 		// Pelanggan
+
+		// Laporan
+
+		    function getPenjualanLaporan()
+		    {
+		    	$this->_get_datatables_query();
+		        if($_POST['length'] != -1)
+		        $this->db->limit($_POST['length'], $_POST['start']);
+		    	
+		        $query = $this->db->get();
+		        return $query->result();
+		    }
+
+		    function count_filtered_penjualanLaporan()
+		    {
+		        $this->_get_datatables_query();
+		        $query = $this->db->get();
+		        return $query->num_rows();
+		    }
+		 
+		    function count_all_penjualanLaporan()
+		    {
+		        $this->db->from($this->table);
+		        return $this->db->count_all_results();
+		    }
+		    
+		// Laporan
 
 	// Datatable Penjualan
 

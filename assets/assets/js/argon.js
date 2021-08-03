@@ -1605,7 +1605,7 @@ var DatatableButtons = (function() {
 		// For more options check out the Datatables Docs:
 		// https://datatables.net/extensions/buttons/
 
-		var buttons = ["copy", "print"];
+		var buttons = ["copy", "print", "excel"];
 
 		// Basic options. For more options check out the Datatables Docs:
 		// https://datatables.net/manual/options
