@@ -2,6 +2,12 @@
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	
 	class Dashboard extends CI_Controller {
+
+		public function __construct()
+		{
+			parent::__construct();
+			$this->load->model('DashboardModel');
+		}
 	
 		public function index()
 		{
@@ -15,6 +21,16 @@
 			$this->load->view('partials/footer');
 			$this->load->view('pelanggan/plugins/dashboard');
 		}
+
+		public function getTotal()
+		{
+			$get['jenis'] = 'id_pelanggan';
+			$get['id_pelanggan'] = $this->session->userdata('id');
+			$data['penjualan'] 	= $this->DashboardModel->getPenjualanById($get)->num_rows();
+
+			echo json_encode($data);
+		}
+	
 	
 	}
 	

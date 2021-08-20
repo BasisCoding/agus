@@ -11,9 +11,9 @@
 			$this->load->view('partials/head', $def);
 			$this->load->view('partials/navbar');
 			$this->load->view('partials/breadcrumb', $def);
-			$this->load->view('pelanggan/dashboard');
+			$this->load->view('kurir/dashboard');
 			$this->load->view('partials/footer');
-			$this->load->view('pelanggan/plugins/dashboard');
+			$this->load->view('kurir/plugins/dashboard');
 		}
 	
 	}
